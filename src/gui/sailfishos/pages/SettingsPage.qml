@@ -89,6 +89,15 @@ Page {
                     fahrplanBackend.setParser(fahrplanBackend.backends.getParserIdForItemIndex(currentIndex))
                 }
 
+                PullDownMenu {
+                    MenuItem {
+                        text: qsTr("Set current as default")
+                        onClicked: {
+                            fahrplanBackend.defaultBackend = fahrplanBackend.backends.setDefaultBackend(fahrplanBackend.getSettingsValue("currentBackend", 0));
+                        }
+                    }
+                }
+
             }
 
             Button {

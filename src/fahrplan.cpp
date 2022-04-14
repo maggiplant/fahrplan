@@ -51,7 +51,15 @@ Fahrplan::Fahrplan(QObject *parent)
     setMode(static_cast<Mode>(settings->value("mode", DepartureMode).toInt()));
 
     if (!m_parser_manager) {
-        int currentBackend = settings->value("currentBackend", 0).toInt();
+        int currentBackend;
+
+        if (settings->value("defaultBackend", 1234).toInt() != 1234) { // Ridiculously big default number to check if there is a defaultBackend set. TODO: Find better way to do this
+            currentBackend = settings->value("defaultBackend", 0).toInt();
+        }
+        else {
+            currentBackend = settings->value("currentBackend", 0).toInt();
+        }
+
         m_parser_manager = new FahrplanBackendManager(currentBackend);
     }
     connect(m_parser_manager, SIGNAL(parserChanged(const QString &, int)), this, SLOT(onParserChanged(const QString &, int)));

@@ -98,3 +98,7 @@ void Backends::setBackendParserList(const QStringList &list)
     endResetModel();
     emit countChanged();
 }
+
+void Backends::setDefaultBackend(QSettings* settingsObject, int parserId) const { // Is parserId hier een nuttige naam (en uberhaupt het goede om op te slaan)?
+    settingsObject->setValue("defaultBackend", parserId);
+}

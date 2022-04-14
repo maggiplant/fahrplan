@@ -22,6 +22,7 @@
 
 #include <QAbstractListModel>
 #include <QStringList>
+#include "QSettings"
 
 class Backends :public QAbstractListModel
 {
@@ -50,6 +51,7 @@ signals:
 public slots:
     int getItemIndexForParserId(int parserId) const;
     int getParserIdForItemIndex(int index) const;
+    void setDefaultBackend(QSettings* settingsObject, int parserId) const;
 
 private:
     QStringList m_list;
